@@ -1,0 +1,26 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1920" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F8FAFC" />
+      <stop offset="1" stop-color="#F1F5F9" />
+    </linearGradient>
+    <linearGradient id="primary" x1="0" y1="0" x2="1000" y2="1000" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F59E0B" stop-opacity="0.1" />
+      <stop offset="1" stop-color="#D97706" stop-opacity="0.05" />
+    </linearGradient>
+    <clipPath id="clip0">
+      <rect width="1920" height="1080" fill="white"/>
+    </clipPath>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <g clip-path="url(#clip0)">
+    <!-- Abstract Cityscape/Network -->
+    <path d="M0 1080 L1920 1080 L1920 800 C1500 850 1200 600 800 900 C400 1200 200 900 0 1000 Z" fill="#E2E8F0" fill-opacity="0.5"/>
+    <circle cx="1500" cy="500" r="400" fill="url(#primary)"/>
+    <circle cx="200" cy="800" r="300" fill="#FEF3C7" fill-opacity="0.2"/>
+    
+    <!-- Geo Shapes -->
+    <rect x="1400" y="300" width="200" height="200" rx="40" stroke="#F59E0B" stroke-width="2" stroke-opacity="0.2" transform="rotate(45 1500 400)"/>
+    <rect x="1500" y="400" width="150" height="150" rx="30" stroke="#1E293B" stroke-width="2" stroke-opacity="0.1" transform="rotate(30 1575 475)"/>
+  </g>
+</svg>

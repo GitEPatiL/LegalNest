@@ -1,107 +1,186 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import CTAButton from '../CTAButtons';
-import { fadeUp, staggerContainer } from '../Animations/fadeUp';
+import { useState } from 'react';
+import Image from 'next/image';
+import EnquiryForm from '../Forms/EnquiryForm';
 
 /**
- * HeroD: Carousel / Cards
- * Features: Static placeholder 3D cards stack representation
+ * HeroD: Full-Screen Impact (Contact Page)
+ * Features: Ken Burns effect, form slide-in, success animations
  */
 export default function HeroD({
-    headline = "One Platform, All Legal Needs",
-    subtext = "Browse through our extensive catalog of legal services tailored for your business.",
-    ctaText = "View All Services",
-    ctaHref = "/services"
+    headline = "Let's Build Your Business Together",
+    subtext = "Get expert legal consultation from our experienced team. We're here to help you navigate compliance with confidence.",
+    bgImage = "/images/heroes/contact.svg"
 }) {
+    const [formSubmitted, setFormSubmitted] = useState(false);
+
     return (
-        <section className="relative min-h-[90vh] bg-gradient-to-b from-primary-50 to-white flex items-center overflow-hidden">
+        <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+            {/* Ken Burns Background Effect */}
+            <motion.div
+                className="absolute inset-0"
+                animate={{
+                    scale: [1, 1.1, 1],
+                }}
+                transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                }}
+            >
+                <div className="relative w-full h-full">
+                    {bgImage ? (
+                        <>
+                            <Image
+                                src={bgImage}
+                                alt="Contact Us"
+                                fill
+                                className="object-cover"
+                                priority
+                                sizes="100vw"
+                            />
+                            {/* Dark Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/70 to-gray-900/50" />
+                        </>
+                    ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
+                    )}
+                </div>
+            </motion.div>
 
-            <div className="container mx-auto px-4">
-                <div className="flex flex-col lg:flex-row items-center gap-16">
+            {/* Animated Gradient Overlay */}
+            <motion.div
+                className="absolute inset-0"
+                animate={{
+                    background: [
+                        'radial-gradient(circle at 20% 50%, rgba(249, 115, 22, 0.1) 0%, transparent 50%)',
+                        'radial-gradient(circle at 80% 50%, rgba(249, 115, 22, 0.1) 0%, transparent 50%)',
+                        'radial-gradient(circle at 20% 50%, rgba(249, 115, 22, 0.1) 0%, transparent 50%)',
+                    ],
+                }}
+                transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+            />
 
-                    {/* Text Content */}
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    {/* Left Content */}
                     <motion.div
-                        variants={staggerContainer}
-                        initial="hidden"
-                        animate="visible"
-                        className="w-full lg:w-1/2 z-10"
+                        initial={{ opacity: 0, x: -50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8, ease: [0.6, 0.05, 0.01, 0.9] }}
+                        className="text-white"
                     >
-                        <motion.h1 variants={fadeUp} className="text-5xl lg:text-6xl font-bold text-dark-900 mb-6 font-display">
+                        {/* Badge */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                            className="inline-flex items-center gap-2 mb-6 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-sm font-semibold"
+                        >
+                            <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+                            Available 24/7
+                        </motion.div>
+
+                        <motion.h1
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3, duration: 0.8 }}
+                            className="text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+                        >
                             {headline}
                         </motion.h1>
-                        <motion.p variants={fadeUp} className="text-xl text-gray-600 mb-8 max-w-lg">
+
+                        <motion.p
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4, duration: 0.8 }}
+                            className="text-lg lg:text-xl text-gray-200 mb-10 leading-relaxed max-w-lg"
+                        >
                             {subtext}
                         </motion.p>
-                        <motion.div variants={fadeUp}>
-                            <CTAButton href={ctaHref} variant="primary">
-                                {ctaText}
-                            </CTAButton>
+
+                        {/* Contact Info Cards */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.5, duration: 0.8 }}
+                            className="space-y-4"
+                        >
+                            <a
+                                href="tel:+919876543210"
+                                className="flex items-center gap-4 p-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:bg-white/20 transition-all group"
+                            >
+                                <div className="w-14 h-14 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p className="text-sm text-gray-300">Call Us</p>
+                                    <p className="text-lg font-bold">+91 98765 43210</p>
+                                </div>
+                            </a>
+
+                            <a
+                                href="mailto:info@legalnest.com"
+                                className="flex items-center gap-4 p-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl hover:bg-white/20 transition-all group"
+                            >
+                                <div className="w-14 h-14 bg-gradient-to-br from-accent-yellow to-accent-yellow/80 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p className="text-sm text-gray-300">Email Us</p>
+                                    <p className="text-lg font-bold">info@legalnest.com</p>
+                                </div>
+                            </a>
                         </motion.div>
                     </motion.div>
 
-                    {/* Cards Stack Visual */}
+                    {/* Right Form */}
                     <motion.div
-                        initial={{ opacity: 0, x: 100 }}
+                        initial={{ opacity: 0, x: 50 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="w-full lg:w-1/2 relative h-[500px] flex items-center justify-center perspective-1000"
+                        transition={{ duration: 0.8, delay: 0.3, ease: [0.6, 0.05, 0.01, 0.9] }}
+                        className="relative"
                     >
-                        {/* Card 3 (Back) */}
-                        <motion.div
-                            animate={{ y: [0, -20, 0] }}
-                            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                            className="absolute top-10 right-10 w-72 h-96 bg-white rounded-2xl shadow-xl p-6 border-t-8 border-primary-300 opacity-60 scale-90 -rotate-6 z-0"
-                        >
-                            <div className="h-4 w-12 bg-gray-200 rounded mb-4" />
-                            <div className="h-6 w-32 bg-gray-100 rounded mb-8" />
-                            <div className="space-y-3">
-                                <div className="h-2 w-full bg-gray-50 rounded" />
-                                <div className="h-2 w-full bg-gray-50 rounded" />
-                            </div>
-                        </motion.div>
-
-                        {/* Card 2 (Middle) */}
-                        <motion.div
-                            animate={{ y: [0, -30, 0] }}
-                            transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                            className="absolute top-6 right-20 w-72 h-96 bg-white rounded-2xl shadow-2xl p-6 border-t-8 border-primary-400 opacity-80 scale-95 rotate-3 z-10"
-                        >
-                            <div className="h-4 w-12 bg-primary-100 rounded mb-4" />
-                            <div className="h-6 w-40 bg-gray-100 rounded mb-8" />
-                            <div className="space-y-3">
-                                <div className="h-2 w-full bg-gray-50 rounded" />
-                                <div className="h-2 w-4/5 bg-gray-50 rounded" />
-                            </div>
-                        </motion.div>
-
-                        {/* Card 1 (Front) */}
-                        <motion.div
-                            animate={{ y: [0, -15, 0] }}
-                            transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-                            className="absolute right-32 w-80 h-[420px] bg-white rounded-2xl shadow-2xl p-8 border-t-8 border-primary-500 z-20"
-                        >
-                            <div className="flex justify-between items-start mb-6">
-                                <div className="w-12 h-12 bg-primary-50 rounded-lg flex items-center justify-center text-2xl">
-                                    🚀
+                        {!formSubmitted ? (
+                            <div className="bg-white rounded-3xl shadow-2xl p-8 lg:p-10">
+                                <div className="mb-8">
+                                    <h2 className="text-3xl font-bold text-gray-900 mb-2">Get in Touch</h2>
+                                    <p className="text-gray-600">Fill out the form and we'll get back to you within 24 hours</p>
                                 </div>
-                                <span className="text-xs font-bold text-green-500 bg-green-50 px-2 py-1 rounded">POPULAR</span>
+                                <EnquiryForm serviceName="General Enquiry" />
                             </div>
-                            <h3 className="text-2xl font-bold text-dark-900 mb-2">Startup India</h3>
-                            <p className="text-gray-500 text-sm mb-6">Complete registration package for new businesses in India.</p>
-
-                            <div className="space-y-4 mb-8">
-                                {['Company Incorporation', 'GST Registration', 'PAN & TAN'].map((item, i) => (
-                                    <div key={i} className="flex items-center gap-2 text-sm text-gray-600">
-                                        <span className="text-green-500">✓</span> {item}
-                                    </div>
-                                ))}
-                            </div>
-
-                            <button className="w-full py-3 bg-dark-900 text-white rounded-lg font-medium text-sm">
-                                Get Started
-                            </button>
-                        </motion.div>
+                        ) : (
+                            <motion.div
+                                initial={{ scale: 0.9, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                className="bg-white rounded-3xl shadow-2xl p-12 text-center"
+                            >
+                                <motion.div
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1, rotate: 360 }}
+                                    transition={{ type: 'spring', duration: 0.8 }}
+                                    className="w-24 h-24 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6"
+                                >
+                                    <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </motion.div>
+                                <h3 className="text-3xl font-bold text-gray-900 mb-3">Thank You!</h3>
+                                <p className="text-gray-600 mb-8">We've received your message and will get back to you shortly.</p>
+                                <button
+                                    onClick={() => setFormSubmitted(false)}
+                                    className="px-6 py-3 bg-primary-500 text-white rounded-lg font-semibold hover:bg-primary-600 transition-colors"
+                                >
+                                    Send Another Message
+                                </button>
+                            </motion.div>
+                        )}
                     </motion.div>
                 </div>
             </div>
