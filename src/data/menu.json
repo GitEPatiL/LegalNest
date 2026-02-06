@@ -1,0 +1,60 @@
+[
+    {
+        "id": "services",
+        "label": "Services",
+        "items": [
+            {
+                "label": "GST Registration",
+                "href": "/services/gst"
+            },
+            {
+                "label": "Company Incorporation",
+                "href": "/services/incorporation"
+            },
+            {
+                "label": "Trademark Registration",
+                "href": "/services/trademark"
+            },
+            {
+                "label": "Legal Consultation",
+                "href": "/services/consultation"
+            }
+        ]
+    },
+    {
+        "id": "resources",
+        "label": "Resources",
+        "items": [
+            {
+                "label": "Blog",
+                "href": "/blog"
+            },
+            {
+                "label": "FAQs",
+                "href": "/faqs"
+            },
+            {
+                "label": "Legal Guides",
+                "href": "/guides"
+            }
+        ]
+    },
+    {
+        "id": "company",
+        "label": "Company",
+        "items": [
+            {
+                "label": "About Us",
+                "href": "/about"
+            },
+            {
+                "label": "Contact",
+                "href": "/contact"
+            },
+            {
+                "label": "Careers",
+                "href": "/careers"
+            }
+        ]
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "id": "gst-registration",
+        "title": "GST Registration",
+        "description": "Complete GST registration and compliance services",
+        "category": "tax"
+    },
+    {
+        "id": "company-incorporation",
+        "title": "Company Incorporation",
+        "description": "Business registration and incorporation services",
+        "category": "business"
+    },
+    {
+        "id": "trademark-registration",
+        "title": "Trademark Registration",
+        "description": "Protect your brand with trademark registration",
+        "category": "intellectual-property"
+    },
+    {
+        "id": "legal-consultation",
+        "title": "Legal Consultation",
+        "description": "Expert legal advice for your business needs",
+        "category": "consultation"
+    }
+]
