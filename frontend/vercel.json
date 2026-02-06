@@ -6,10 +6,5 @@
             "use": "@vercel/next"
         }
     ],
-    "rewrites": [
-        {
-            "source": "/sitemap.xml",
-            "destination": "/api/sitemap"
-        }
-    ]
+    "rewrites": []
 }
