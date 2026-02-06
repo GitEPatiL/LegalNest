@@ -1,56 +1,79 @@
 'use client';
 
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Link from 'next/link';
-import siteConfig from '@/config/siteConfig';
-import { fadeUp, fadeUpReduced } from './Animations/fadeUp';
 
 /**
- * CTA Button Component
- * Renders a primary or ghost style button with animation
+ * CTAButton Component
+ * Reusable Call-to-Action button with variants and animations
  * 
- * @param {string} href - Link destination (optional, renders <button> if missing)
- * @param {string} variant - 'primary' | 'ghost' | 'outline'
- * @param {Function} onClick - Click handler
- * @param {React.ReactNode} children - Button content
- * @param {string} className - Additional classes
+ * @param {string} variant - Button style: 'primary', 'secondary', 'outline', 'ghost'
+ * @param {string} href - Link destination (uses Next.js Link)
+ * @param {function} onClick - Click handler (renders as button)
+ * @param {string} className - Additional CSS classes
+ * @param {ReactNode} children - Button content
  */
 export default function CTAButton({
-    href,
     variant = 'primary',
+    href,
     onClick,
-    children,
     className = '',
+    children,
+    disabled = false,
+    type = 'button',
     ...props
 }) {
-    const shouldReduceMotion = useReducedMotion();
-    const variants = shouldReduceMotion ? fadeUpReduced : fadeUp;
+    // Base styles
+    const baseStyles = 'inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-bold text-base transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-offset-2';
 
-    const baseStyles = "inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2";
-
-    const variantStyles = {
-        primary: "bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500 shadow-md hover:shadow-lg hover:-translate-y-0.5",
-        ghost: "bg-transparent text-dark-700 hover:text-primary-600 hover:bg-primary-50",
-        outline: "border-2 border-primary-500 text-primary-600 hover:bg-primary-50 focus:ring-primary-500"
+    // Variant styles with hover glow effects
+    const variants = {
+        primary: `bg-primary-500 text-white hover:bg-primary-600 focus:ring-primary-500 
+              hover:shadow-lg hover:shadow-primary-500/50 hover:scale-105 
+              active:scale-95 motion-safe:hover:animate-glow`,
+        secondary: `bg-dark-900 text-white hover:bg-dark-800 focus:ring-dark-700
+                hover:shadow-lg hover:shadow-dark-900/50 hover:scale-105 
+                active:scale-95`,
+        outline: `border-2 border-primary-500 text-primary-500 hover:bg-primary-50 focus:ring-primary-500
+              hover:shadow-lg hover:shadow-primary-500/30 hover:scale-105 
+              active:scale-95`,
+        ghost: `text-primary-600 hover:bg-primary-50 focus:ring-primary-500
+            hover:shadow-md hover:scale-105 active:scale-95`,
     };
 
-    const Component = href ? Link : 'button';
-    const elementProps = href ? { href, ...props } : { onClick, ...props };
+    const buttonClasses = `${baseStyles} ${variants[variant]} ${className}`;
 
+    // Motion animation with reduced motion support
+    const motionProps = {
+        whileHover: { scale: disabled ? 1 : 1.05 },
+        whileTap: { scale: disabled ? 1 : 0.95 },
+        transition: { duration: 0.2 },
+    };
+
+    const content = children;
+
+    // Render as Link if href is provided
+    if (href && !disabled) {
+        return (
+            <motion.div {...motionProps} className="inline-block">
+                <Link href={href} className={buttonClasses} {...props}>
+                    {content}
+                </Link>
+            </motion.div>
+        );
+    }
+
+    // Render as button
     return (
-        <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={variants}
-            className="inline-block"
+        <motion.button
+            type={type}
+            onClick={onClick}
+            disabled={disabled}
+            className={buttonClasses}
+            {...motionProps}
+            {...props}
         >
-            <Component
-                className={`${baseStyles} ${variantStyles[variant] || variantStyles.primary} ${className}`}
-                {...elementProps}
-            >
-                {children}
-            </Component>
-        </motion.div>
+            {content}
+        </motion.button>
     );
 }

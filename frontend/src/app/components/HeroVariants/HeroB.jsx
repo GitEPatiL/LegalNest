@@ -1,13 +1,14 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { useRef } from 'react';
 import CTAButton from '../CTAButtons';
 import { fadeUp, staggerContainer } from '../Animations/fadeUp';
 
 /**
- * HeroB: Split Design
+ * HeroB: Split Design with Parallax
  * Features: Split screen image + text with parallax background effect
+ * Respects prefers-reduced-motion
  * 
  * @param {string} headline - Main headline
  * @param {string} subtext - Supporting text
@@ -20,18 +21,21 @@ export default function HeroB({
     bgImage
 }) {
     const ref = useRef(null);
+    const shouldReduceMotion = useReducedMotion();
+
     const { scrollYProgress } = useScroll({
         target: ref,
         offset: ["start start", "end start"]
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+    // Parallax effect (disabled for reduced motion)
+    const y = useTransform(scrollYProgress, [0, 1], shouldReduceMotion ? ["0%", "0%"] : ["0%", "30%"]);
 
     return (
         <section ref={ref} className="relative min-h-[90vh] flex overflow-hidden">
             {/* Left Content */}
             <div className="w-full lg:w-1/2 flex items-center bg-white z-10 relative">
-                <div className="container mx-auto px-8 lg:px-16 py-12 lg:py-0">
+                <div className="container mx-auto px-6 sm:px-8 lg:px-16 py-12 lg:py-0">
                     <motion.div
                         variants={staggerContainer}
                         initial="hidden"
@@ -42,19 +46,19 @@ export default function HeroB({
                             Professional & Reliable
                         </motion.span>
 
-                        <motion.h1 variants={fadeUp} className="text-4xl lg:text-6xl font-bold text-dark-900 mb-6 leading-tight">
+                        <motion.h1 variants={fadeUp} className="text-4xl sm:text-5xl lg:text-6xl font-bold text-dark-900 mb-6 leading-tight">
                             {headline}
                         </motion.h1>
 
-                        <motion.p variants={fadeUp} className="text-lg text-gray-600 mb-8">
+                        <motion.p variants={fadeUp} className="text-base sm:text-lg text-gray-600 mb-8">
                             {subtext}
                         </motion.p>
 
-                        <motion.div variants={fadeUp} className="flex gap-4">
+                        <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-4">
                             <CTAButton href={ctaHref} variant="primary">
                                 {ctaText}
                             </CTAButton>
-                            <CTAButton href="/about" variant="outline">
+                            <CTAButton href="/about-us" variant="outline">
                                 Our Story
                             </CTAButton>
                         </motion.div>
@@ -62,12 +66,15 @@ export default function HeroB({
                 </div>
 
                 {/* Decorative Element */}
-                <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-primary-100 rounded-full blur-[80px] -z-10" />
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-primary-100 rounded-full blur-[80px] -z-10 motion-reduce:blur-none motion-reduce:opacity-30" />
             </div>
 
             {/* Right Image (Parallax) */}
             <div className="hidden lg:block w-1/2 relative h-screen bg-gray-100 overflow-hidden">
-                <motion.div style={{ y }} className="absolute inset-0 w-full h-[120%] -top-[10%]">
+                <motion.div
+                    style={{ y }}
+                    className="absolute inset-0 w-full h-[120%] -top-[10%] motion-reduce:h-full motion-reduce:top-0"
+                >
                     {bgImage ? (
                         <img src={bgImage} alt="Legal Office" className="w-full h-full object-cover" />
                     ) : (
