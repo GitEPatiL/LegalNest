@@ -10,7 +10,9 @@
     "sitemap": "node scripts/generateSitemap.js",
     "routes": "node scripts/generatePages.js",
     "routes:csv": "node scripts/generatePages.js --csv",
-    "routes:all": "node scripts/generatePages.js --json --csv --verbose"
+    "routes:all": "node scripts/generatePages.js --json --csv --verbose",
+    "variations": "node scripts/generateVariations.js",
+    "variations:preview": "node scripts/generateVariations.js --dry-run --limit 10"
   },
   "dependencies": {
     "next": "15.1.3",

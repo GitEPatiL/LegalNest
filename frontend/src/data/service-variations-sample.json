@@ -1,0 +1,134 @@
+[
+    {
+        "id": "gst-registration-for-ecommerce",
+        "title": "GST Registration for E-commerce",
+        "slug": "gst-registration-for-ecommerce",
+        "category": "Tax & Compliance",
+        "subCategory": "E-commerce Services",
+        "layoutVariant": "service-detail",
+        "variationType": "industry",
+        "variationId": "ecommerce",
+        "seo": {
+            "title": "GST Registration for E-commerce Business | LegalNest",
+            "description": "Specialized GST registration services for e-commerce businesses. Expert guidance for high transaction volume.",
+            "canonical": "/services/gst-registration-for-ecommerce"
+        },
+        "content": {
+            "headline": "GST Registration for E-commerce Businesses",
+            "subtext": "Streamlined GST registration designed specifically for e-commerce industry requirements.",
+            "benefits": [
+                {
+                    "title": "streamlined compliance",
+                    "description": "Specialized support for e-commerce businesses"
+                },
+                {
+                    "title": "multi-state registration support",
+                    "description": "Specialized support for e-commerce businesses"
+                },
+                {
+                    "title": "digital-first processes",
+                    "description": "Specialized support for e-commerce businesses"
+                }
+            ],
+            "challenges": [
+                "high transaction volume",
+                "interstate sales",
+                "digital product regulations"
+            ],
+            "keywords": [
+                "online store",
+                "digital marketplace",
+                "online retail"
+            ]
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "gst-registration-for-restaurant",
+        "title": "GST Registration for Restaurant & Food Service",
+        "slug": "gst-registration-for-restaurant",
+        "category": "Tax & Compliance",
+        "subCategory": "Restaurant & Food Service Services",
+        "layoutVariant": "service-detail",
+        "variationType": "industry",
+        "variationId": "restaurant",
+        "seo": {
+            "title": "GST Registration for Restaurant & Food Service Business | LegalNest",
+            "description": "Specialized GST registration services for restaurant & food service businesses. Expert guidance for food safety compliance.",
+            "canonical": "/services/gst-registration-for-restaurant"
+        },
+        "content": {
+            "headline": "GST Registration for Restaurant & Food Service Businesses",
+            "subtext": "Streamlined GST registration designed specifically for restaurant & food service industry requirements.",
+            "benefits": [
+                {
+                    "title": "food license bundling",
+                    "description": "Specialized support for restaurant & food service businesses"
+                },
+                {
+                    "title": "health compliance support",
+                    "description": "Specialized support for restaurant & food service businesses"
+                },
+                {
+                    "title": "vendor registration",
+                    "description": "Specialized support for restaurant & food service businesses"
+                }
+            ],
+            "challenges": [
+                "food safety compliance",
+                "health regulations",
+                "vendor management"
+            ],
+            "keywords": [
+                "food business",
+                "eatery",
+                "food service"
+            ]
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "trademark-registration-for-saas",
+        "title": "Trademark Registration for SaaS & Software",
+        "slug": "trademark-registration-for-saas",
+        "category": "IPR & Trademark",
+        "subCategory": "SaaS & Software Services",
+        "layoutVariant": "service-detail",
+        "variationType": "industry",
+        "variationId": "saas",
+        "seo": {
+            "title": "Trademark Registration for SaaS & Software Business | LegalNest",
+            "description": "Specialized trademark registration services for SaaS & software businesses. Expert guidance for IP protection.",
+            "canonical": "/services/trademark-registration-for-saas"
+        },
+        "content": {
+            "headline": "Trademark Registration for SaaS & Software Businesses",
+            "subtext": "Streamlined trademark registration designed specifically for SaaS & software industry requirements.",
+            "benefits": [
+                {
+                    "title": "IP strategy support",
+                    "description": "Specialized support for SaaS & software businesses"
+                },
+                {
+                    "title": "global compliance",
+                    "description": "Specialized support for SaaS & software businesses"
+                },
+                {
+                    "title": "data protection guidance",
+                    "description": "Specialized support for SaaS & software businesses"
+                }
+            ],
+            "challenges": [
+                "IP protection",
+                "international clients",
+                "data regulations"
+            ],
+            "keywords": [
+                "software company",
+                "tech startup",
+                "SaaS business"
+            ]
+        },
+        "contentBlocks": []
+    }
+]
