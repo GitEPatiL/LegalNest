@@ -14,7 +14,8 @@ class EmailService {
             return;
         }
 
-        this.transporter = nodemailer.createTransporter({
+        // Use createTransport (standard method)
+        this.transporter = nodemailer.createTransport({
             host: config.smtp.host,
             port: config.smtp.port,
             secure: false, // Use TLS

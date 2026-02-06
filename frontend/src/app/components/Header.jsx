@@ -32,6 +32,7 @@ export default function Header() {
     }, [isMobileMenuOpen]);
 
     const navItems = [
+        { label: 'Home', href: '/' },
         { label: 'About', href: '/about-us' },
         { label: 'Blog', href: '/blog' },
     ];
@@ -63,7 +64,7 @@ export default function Header() {
                             </motion.div>
 
                             {/* Desktop - Basic Nav Links */}
-                            <nav className="hidden lg:flex items-center gap-8">
+                            <nav className="hidden md:flex items-center gap-8">
                                 {navItems.map((item, index) => (
                                     <motion.div
                                         key={item.label}
@@ -83,7 +84,7 @@ export default function Header() {
 
                             {/* Desktop - Contact Section */}
                             <motion.div
-                                className="hidden lg:flex items-center gap-3"
+                                className="hidden md:flex items-center gap-3"
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.5, delay: 0.2 }}
@@ -123,7 +124,7 @@ export default function Header() {
                             {/* Mobile Menu Toggle */}
                             <motion.button
                                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                                className="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-100 active:bg-gray-200 transition-colors"
+                                className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-gray-100 active:bg-gray-200 transition-colors"
                                 aria-label="Toggle mobile menu"
                                 whileTap={{ scale: 0.92 }}
                             >
@@ -160,7 +161,7 @@ export default function Header() {
 
                 {/* Services Navigation Bar - Sticky below top bar */}
                 <motion.div
-                    className={`hidden lg:block bg-white border-t border-gray-100 transition-all duration-300 ${isScrolled ? 'shadow-md border-b border-gray-200' : 'shadow-sm'
+                    className={`hidden md:block bg-white border-t border-gray-100 transition-all duration-300 ${isScrolled ? 'shadow-md border-b border-gray-200' : 'shadow-sm'
                         }`}
                 >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -184,7 +185,7 @@ export default function Header() {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.3 }}
-                            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+                            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
                             onClick={() => setIsMobileMenuOpen(false)}
                         />
 
@@ -194,7 +195,7 @@ export default function Header() {
                             animate={{ x: 0 }}
                             exit={{ x: '100%' }}
                             transition={{ type: 'spring', damping: 28, stiffness: 280 }}
-                            className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white shadow-2xl z-50 lg:hidden overflow-y-auto"
+                            className="fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white shadow-2xl z-50 md:hidden overflow-y-auto"
                         >
                             {/* Mobile Menu Header */}
                             <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 bg-gradient-to-r from-white to-gray-50/50">

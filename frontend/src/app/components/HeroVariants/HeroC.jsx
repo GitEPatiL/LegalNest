@@ -15,7 +15,7 @@ export default function HeroC({
     subtext = "We are a team of experienced legal professionals dedicated to simplifying compliance for businesses across India.",
     ctaText = "Contact Us",
     ctaHref = "/contact-us",
-    teamImage = "/images/heroes/about-team.svg"
+    teamImage = "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=1920"
 }) {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: '-100px' });

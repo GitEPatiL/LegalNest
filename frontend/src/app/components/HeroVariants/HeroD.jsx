@@ -12,7 +12,7 @@ import EnquiryForm from '../Forms/EnquiryForm';
 export default function HeroD({
     headline = "Let's Build Your Business Together",
     subtext = "Get expert legal consultation from our experienced team. We're here to help you navigate compliance with confidence.",
-    bgImage = "/images/heroes/contact.svg"
+    bgImage = "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=1920"
 }) {
     const [formSubmitted, setFormSubmitted] = useState(false);
 

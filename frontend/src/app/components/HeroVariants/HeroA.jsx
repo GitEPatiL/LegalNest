@@ -16,7 +16,7 @@ export default function HeroA({
     subtext = "Simplify your business journey with our expert legal services. From registration to annual filing, we handle it all.",
     ctaText = "Get Started",
     ctaHref = "/contact-us",
-    bgImage = "/images/heroes/homepage.svg"
+    bgImage = "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&q=80&w=1920"
 }) {
     return (
         <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-white via-gray-50 to-primary-50/30">

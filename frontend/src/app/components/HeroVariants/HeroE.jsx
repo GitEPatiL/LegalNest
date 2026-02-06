@@ -13,7 +13,7 @@ export default function HeroE({
     headline = "Legal Insights & Updates",
     subtext = "Stay informed with the latest news, guides, and expert opinions on business compliance and legal matters.",
     categories = ['All', 'Tax & Compliance', 'Business', 'Legal Updates', 'Guides'],
-    bgImage = "/images/heroes/blog.svg"
+    bgImage = "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=1920"
 }) {
     const [searchFocused, setSearchFocused] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('All');
