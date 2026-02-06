@@ -1,63 +1,100 @@
-# LegalNest - Legal Compliance Platform
+# LegalNest - Monorepo
 
-A production-grade Next.js application for legal compliance services.
-
-## Tech Stack
-
-- **Framework**: Next.js 15 (App Router)
-- **Language**: JavaScript (JSX)
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Package Manager**: npm
-
-## Getting Started
-
-1. Install dependencies:
-```bash
-npm install
-```
-
-2. Run the development server:
-```bash
-npm run dev
-```
-
-3. Open [http://localhost:3000](http://localhost:3000) in your browser.
+Production-grade legal compliance platform with separate frontend and backend.
 
 ## Project Structure
 
 ```
-/src
- ├─ app/                  # Next.js App Router pages
- │   ├─ layout.jsx        # Root layout with Header/Footer
- │   ├─ page.jsx          # Home page
- │   ├─ globals.css       # Global styles
- │   └─ components/       # UI components
- ├─ config/               # Configuration files
- ├─ data/                 # Static data (JSON)
- ├─ lib/                  # Utility functions
- ├─ styles/               # Theme and custom styles
- └─ pages/api/            # API routes
-/public
- └─ assets/               # Static assets
+/
+├── frontend/          # Next.js App (React)
+└── backend/           # Node.js/Express API
 ```
 
-## Theme
+## Quick Start
 
-The project uses a yellow and black color scheme:
-- Primary: Yellow (#f59e0b)
-- Dark: Black (#1a1a1a)
+### Frontend (Next.js)
 
-## Available Scripts
+```bash
+cd frontend
+npm install
+npm run dev
+# Opens on http://localhost:3000
+```
 
-- `npm run dev` - Start development server with Turbopack
-- `npm run build` - Build for production
-- `npm start` - Start production server
-- `npm run lint` - Run linting
+### Backend (Express API)
 
-## Next Steps
+```bash
+cd backend
+npm install
+cp .env.example .env   # Configure your environment
+npm run dev
+# Runs on http://localhost:5000
+```
 
-1. Implement component UIs
-2. Add pages for services
-3. Configure email service for contact forms
-4. Add content and assets
+## Documentation
+
+- **Frontend**: See [frontend/README.md](./frontend/README.md)
+- **Backend**: See [backend/README.md](./backend/README.md)
+- **Config & Theme**: See [frontend/docs/CONFIG_AND_THEME.md](./frontend/docs/CONFIG_AND_THEME.md)
+
+## Tech Stack
+
+### Frontend
+- Next.js 15 (App Router)
+- React 19
+- Tailwind CSS
+- Framer Motion
+
+### Backend
+- Node.js
+- Express.js
+- MongoDB (Mongoose)
+- Nodemailer
+
+## Environment Setup
+
+1. **Frontend** requires `NEXT_PUBLIC_API_URL` in `.env.local`:
+   ```
+   NEXT_PUBLIC_API_URL=http://localhost:5000
+   ```
+
+2. **Backend** requires configuration in `.env` (see backend/.env.example)
+
+## Development Workflow
+
+1. Start backend server: `cd backend && npm run dev`
+2. Start frontend dev server: `cd frontend && npm run dev`
+3. Access app at http://localhost:3000
+
+## Production Deployment
+
+### Frontend
+```bash
+cd frontend
+npm run build
+npm start
+```
+
+### Backend
+```bash
+cd backend
+npm start
+```
+
+## API Integration
+
+Frontend communicates with backend via `apiClient.js`:
+
+```javascript
+import { postContact, getServices } from '@/lib/apiClient';
+
+// Submit contact form
+await postContact({ name, email, message });
+
+// Fetch services
+const services = await getServices();
+```
+
+## License
+
+Private - LegalNest Team
