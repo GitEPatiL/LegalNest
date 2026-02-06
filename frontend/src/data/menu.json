@@ -1,59 +1,191 @@
 [
     {
-        "id": "services",
-        "label": "Services",
-        "items": [
+        "id": "business-registration",
+        "label": "Business Registration",
+        "slug": "business-registration",
+        "description": "Complete business setup and registration services",
+        "children": [
             {
+                "id": "pvt-ltd",
+                "label": "Private Limited Company",
+                "slug": "private-limited-company-registration",
+                "icon": "🏢"
+            },
+            {
+                "id": "llp",
+                "label": "LLP Registration",
+                "slug": "llp-registration",
+                "icon": "🤝"
+            },
+            {
+                "id": "one-person",
+                "label": "One Person Company",
+                "slug": "one-person-company-registration",
+                "icon": "👤"
+            },
+            {
+                "id": "partnership",
+                "label": "Partnership Firm",
+                "slug": "partnership-firm-registration",
+                "icon": "👥"
+            },
+            {
+                "id": "proprietorship",
+                "label": "Sole Proprietorship",
+                "slug": "sole-proprietorship-registration",
+                "icon": "💼"
+            }
+        ]
+    },
+    {
+        "id": "tax-compliance",
+        "label": "Tax & Compliance",
+        "slug": "tax-compliance",
+        "description": "GST, Income Tax and other compliance services",
+        "children": [
+            {
+                "id": "gst-reg",
                 "label": "GST Registration",
-                "href": "/services/gst"
+                "slug": "gst-registration",
+                "icon": "📋"
             },
             {
-                "label": "Company Incorporation",
-                "href": "/services/incorporation"
+                "id": "gst-filing",
+                "label": "GST Return Filing",
+                "slug": "gst-return-filing",
+                "icon": "📊"
             },
             {
+                "id": "income-tax",
+                "label": "Income Tax Filing",
+                "slug": "income-tax-filing",
+                "icon": "💰"
+            },
+            {
+                "id": "tds-filing",
+                "label": "TDS Return Filing",
+                "slug": "tds-return-filing",
+                "icon": "📈"
+            },
+            {
+                "id": "tax-audit",
+                "label": "Tax Audit",
+                "slug": "tax-audit",
+                "icon": "🔍"
+            }
+        ]
+    },
+    {
+        "id": "licenses-registration",
+        "label": "Licenses & Registration",
+        "slug": "licenses-registration",
+        "description": "Various business licenses and registrations",
+        "children": [
+            {
+                "id": "fssai",
+                "label": "FSSAI License",
+                "slug": "fssai-license",
+                "icon": "🍽️"
+            },
+            {
+                "id": "msme",
+                "label": "MSME Registration",
+                "slug": "msme-registration",
+                "icon": "🏭"
+            },
+            {
+                "id": "import-export",
+                "label": "Import Export Code",
+                "slug": "import-export-code",
+                "icon": "🌍"
+            },
+            {
+                "id": "shop-act",
+                "label": "Shop & Establishment",
+                "slug": "shop-establishment-license",
+                "icon": "🏪"
+            },
+            {
+                "id": "drug-license",
+                "label": "Drug License",
+                "slug": "drug-license",
+                "icon": "💊"
+            }
+        ]
+    },
+    {
+        "id": "ipr-trademark",
+        "label": "IPR & Trademark",
+        "slug": "ipr-trademark",
+        "description": "Intellectual property and trademark services",
+        "children": [
+            {
+                "id": "trademark-reg",
                 "label": "Trademark Registration",
-                "href": "/services/trademark"
+                "slug": "trademark-registration",
+                "icon": "™️"
             },
             {
+                "id": "trademark-objection",
+                "label": "Trademark Objection",
+                "slug": "trademark-objection",
+                "icon": "⚠️"
+            },
+            {
+                "id": "copyright",
+                "label": "Copyright Registration",
+                "slug": "copyright-registration",
+                "icon": "©️"
+            },
+            {
+                "id": "patent",
+                "label": "Patent Registration",
+                "slug": "patent-registration",
+                "icon": "🔬"
+            },
+            {
+                "id": "design-reg",
+                "label": "Design Registration",
+                "slug": "design-registration",
+                "icon": "🎨"
+            }
+        ]
+    },
+    {
+        "id": "legal-services",
+        "label": "Legal Services",
+        "slug": "legal-services",
+        "description": "Comprehensive legal support and documentation",
+        "children": [
+            {
+                "id": "legal-agreements",
+                "label": "Legal Agreements",
+                "slug": "legal-agreements",
+                "icon": "📄"
+            },
+            {
+                "id": "legal-notice",
+                "label": "Legal Notice",
+                "slug": "legal-notice",
+                "icon": "⚖️"
+            },
+            {
+                "id": "company-compliance",
+                "label": "Company Compliance",
+                "slug": "company-compliance",
+                "icon": "✅"
+            },
+            {
+                "id": "annual-filing",
+                "label": "Annual Filing (ROC)",
+                "slug": "annual-filing-roc",
+                "icon": "📅"
+            },
+            {
+                "id": "legal-consultation",
                 "label": "Legal Consultation",
-                "href": "/services/consultation"
-            }
-        ]
-    },
-    {
-        "id": "resources",
-        "label": "Resources",
-        "items": [
-            {
-                "label": "Blog",
-                "href": "/blog"
-            },
-            {
-                "label": "FAQs",
-                "href": "/faqs"
-            },
-            {
-                "label": "Legal Guides",
-                "href": "/guides"
-            }
-        ]
-    },
-    {
-        "id": "company",
-        "label": "Company",
-        "items": [
-            {
-                "label": "About Us",
-                "href": "/about"
-            },
-            {
-                "label": "Contact",
-                "href": "/contact"
-            },
-            {
-                "label": "Careers",
-                "href": "/careers"
+                "slug": "legal-consultation",
+                "icon": "💬"
             }
         ]
     }

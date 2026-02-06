@@ -2,25 +2,421 @@
     {
         "id": "gst-registration",
         "title": "GST Registration",
-        "description": "Complete GST registration and compliance services",
-        "category": "tax"
+        "slug": "gst-registration",
+        "category": "Tax & Compliance",
+        "subCategory": "GST Services",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "GST Registration Online - Quick & Easy Process | LegalNest",
+            "description": "Get your GST registration done online in 3-5 days. Expert assistance, affordable pricing, and hassle-free process.",
+            "canonical": "/services/gst-registration"
+        },
+        "contentBlocks": []
     },
     {
-        "id": "company-incorporation",
-        "title": "Company Incorporation",
-        "description": "Business registration and incorporation services",
-        "category": "business"
+        "id": "company-registration",
+        "title": "Private Limited Company Registration",
+        "slug": "private-limited-company-registration",
+        "category": "Business Registration",
+        "subCategory": "Company Formation",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Private Limited Company Registration in India | LegalNest",
+            "description": "Register your Private Limited Company online with expert guidance. Get started today with affordable packages.",
+            "canonical": "/services/private-limited-company-registration"
+        },
+        "contentBlocks": []
     },
     {
         "id": "trademark-registration",
         "title": "Trademark Registration",
-        "description": "Protect your brand with trademark registration",
-        "category": "intellectual-property"
+        "slug": "trademark-registration",
+        "category": "IPR & Trademark",
+        "subCategory": "Trademark Services",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Trademark Registration in India - Protect Your Brand | LegalNest",
+            "description": "Register your trademark online and protect your brand identity. Expert assistance with affordable pricing.",
+            "canonical": "/services/trademark-registration"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "income-tax-filing",
+        "title": "Income Tax Return Filing",
+        "slug": "income-tax-filing",
+        "category": "Tax & Compliance",
+        "subCategory": "Tax Filing",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Income Tax Filing Online - ITR Filing Services | LegalNest",
+            "description": "File your income tax returns online with expert CA assistance. Quick, accurate, and affordable ITR filing.",
+            "canonical": "/services/income-tax-filing"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "msme-registration",
+        "title": "MSME/Udyam Registration",
+        "slug": "msme-registration",
+        "category": "Licenses & Registration",
+        "subCategory": "Government Registration",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "MSME Registration Online - Udyam Registration | LegalNest",
+            "description": "Get MSME/Udyam registration certificate online. Avail government benefits and schemes for small businesses.",
+            "canonical": "/services/msme-registration"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "fssai-license",
+        "title": "FSSAI Food License",
+        "slug": "fssai-license",
+        "category": "Licenses & Registration",
+        "subCategory": "Food License",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "FSSAI License Registration - Food License Online | LegalNest",
+            "description": "Apply for FSSAI food license online. Get state or central license for your food business.",
+            "canonical": "/services/fssai-license"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "shop-establishment-license",
+        "title": "Shop & Establishment License",
+        "slug": "shop-establishment-license",
+        "category": "Licenses & Registration",
+        "subCategory": "Business License",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Shop and Establishment License Registration | LegalNest",
+            "description": "Get shop and establishment license for your business. Complete online registration with expert support.",
+            "canonical": "/services/shop-establishment-license"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "llp-registration",
+        "title": "LLP Registration",
+        "slug": "llp-registration",
+        "category": "Business Registration",
+        "subCategory": "Company Formation",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "LLP Registration Online - Limited Liability Partnership | LegalNest",
+            "description": "Register your LLP online with minimal compliance. Best for professionals and small businesses.",
+            "canonical": "/services/llp-registration"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "gst-return-filing",
+        "title": "GST Return Filing",
+        "slug": "gst-return-filing",
+        "category": "Tax & Compliance",
+        "subCategory": "GST Services",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "GST Return Filing Online - GSTR 1, 3B Filing | LegalNest",
+            "description": "File your GST returns on time with expert assistance. Monthly and quarterly GST filing services.",
+            "canonical": "/services/gst-return-filing"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "partnership-firm-registration",
+        "title": "Partnership Firm Registration",
+        "slug": "partnership-firm-registration",
+        "category": "Business Registration",
+        "subCategory": "Firm Registration",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Partnership Firm Registration Online | LegalNest",
+            "description": "Register your partnership firm with partnership deed. Legal documentation and registration support.",
+            "canonical": "/services/partnership-firm-registration"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "copyright-registration",
+        "title": "Copyright Registration",
+        "slug": "copyright-registration",
+        "category": "IPR & Trademark",
+        "subCategory": "Intellectual Property",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Copyright Registration Online in India | LegalNest",
+            "description": "Protect your creative works with copyright registration. Music, books, software, and artwork protection.",
+            "canonical": "/services/copyright-registration"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "patent-registration",
+        "title": "Patent Registration",
+        "slug": "patent-registration",
+        "category": "IPR & Trademark",
+        "subCategory": "Patent Services",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Patent Registration in India - Protect Your Invention | LegalNest",
+            "description": "File patent application and protect your invention. Expert patent attorneys for complete support.",
+            "canonical": "/services/patent-registration"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "import-export-code",
+        "title": "Import Export Code (IEC)",
+        "slug": "import-export-code",
+        "category": "Licenses & Registration",
+        "subCategory": "Import Export",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "IEC Code Registration - Import Export License | LegalNest",
+            "description": "Get IEC code for import-export business. Quick online registration with digital certificate.",
+            "canonical": "/services/import-export-code"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "tds-return-filing",
+        "title": "TDS Return Filing",
+        "slug": "tds-return-filing",
+        "category": "Tax & Compliance",
+        "subCategory": "Tax Filing",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "TDS Return Filing Online - Quarterly TDS Filing | LegalNest",
+            "description": "File TDS returns online with expert support. Avoid penalties with timely quarterly TDS filing.",
+            "canonical": "/services/tds-return-filing"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "one-person-company-registration",
+        "title": "One Person Company (OPC) Registration",
+        "slug": "one-person-company-registration",
+        "category": "Business Registration",
+        "subCategory": "Company Formation",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "OPC Registration - One Person Company Registration | LegalNest",
+            "description": "Start your OPC with single ownership and limited liability. Ideal for solo entrepreneurs.",
+            "canonical": "/services/one-person-company-registration"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "trademark-objection",
+        "title": "Trademark Objection Reply",
+        "slug": "trademark-objection",
+        "category": "IPR & Trademark",
+        "subCategory": "Trademark Services",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Trademark Objection Reply - Expert Assistance | LegalNest",
+            "description": "Handle trademark objection with expert legal support. Increase approval chances with proper reply.",
+            "canonical": "/services/trademark-objection"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "sole-proprietorship-registration",
+        "title": "Sole Proprietorship Registration",
+        "slug": "sole-proprietorship-registration",
+        "category": "Business Registration",
+        "subCategory": "Firm Registration",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Sole Proprietorship Registration Online | LegalNest",
+            "description": "Register your sole proprietorship business. Minimal compliance and easy registration process.",
+            "canonical": "/services/sole-proprietorship-registration"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "annual-filing-roc",
+        "title": "Annual ROC Filing",
+        "slug": "annual-filing-roc",
+        "category": "Legal Services",
+        "subCategory": "Company Compliance",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Annual ROC Filing - MCA Compliance Services | LegalNest",
+            "description": "File annual returns and financial statements with ROC. Expert MCA compliance support.",
+            "canonical": "/services/annual-filing-roc"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "legal-agreements",
+        "title": "Legal Agreement Drafting",
+        "slug": "legal-agreements",
+        "category": "Legal Services",
+        "subCategory": "Legal Documentation",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Legal Agreement Drafting Services | LegalNest",
+            "description": "Get customized legal agreements drafted by expert lawyers. NDA, partnership deed, and more.",
+            "canonical": "/services/legal-agreements"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "tax-audit",
+        "title": "Tax Audit Services",
+        "slug": "tax-audit",
+        "category": "Tax & Compliance",
+        "subCategory": "Audit Services",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Tax Audit Services by Chartered Accountants | LegalNest",
+            "description": "Professional tax audit services under Section 44AB. CA assistance for compliance.",
+            "canonical": "/services/tax-audit"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "drug-license",
+        "title": "Drug License Registration",
+        "slug": "drug-license",
+        "category": "Licenses & Registration",
+        "subCategory": "Health License",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Drug License Registration - Pharmacy License | LegalNest",
+            "description": "Get drug license for pharmaceutical business. Retail and wholesale drug license support.",
+            "canonical": "/services/drug-license"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "design-registration",
+        "title": "Design Registration",
+        "slug": "design-registration",
+        "category": "IPR & Trademark",
+        "subCategory": "Design Protection",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Design Registration in India - Protect Your Design | LegalNest",
+            "description": "Register your product design and get legal protection. Industrial design registration services.",
+            "canonical": "/services/design-registration"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "legal-notice",
+        "title": "Legal Notice Services",
+        "slug": "legal-notice",
+        "category": "Legal Services",
+        "subCategory": "Legal Support",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Legal Notice Drafting and Sending Services | LegalNest",
+            "description": "Send legal notice through expert lawyers. Recovery, contract breach, and dispute resolution.",
+            "canonical": "/services/legal-notice"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "company-compliance",
+        "title": "Company Compliance Services",
+        "slug": "company-compliance",
+        "category": "Legal Services",
+        "subCategory": "Corporate Compliance",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Company Compliance Services - MCA Compliance | LegalNest",
+            "description": "Complete company compliance support. Board meetings, AGM, financial statements filing.",
+            "canonical": "/services/company-compliance"
+        },
+        "contentBlocks": []
     },
     {
         "id": "legal-consultation",
-        "title": "Legal Consultation",
-        "description": "Expert legal advice for your business needs",
-        "category": "consultation"
+        "title": "Legal Consultation Services",
+        "slug": "legal-consultation",
+        "category": "Legal Services",
+        "subCategory": "Legal Advisory",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Legal Consultation with Expert Lawyers | LegalNest",
+            "description": "Get expert legal advice for your business and personal matters. Connect with experienced lawyers.",
+            "canonical": "/services/legal-consultation"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "ngo-registration",
+        "title": "NGO/Trust Registration",
+        "slug": "ngo-registration",
+        "category": "Business Registration",
+        "subCategory": "Non-Profit",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "NGO Registration - Trust and Society Registration | LegalNest",
+            "description": "Register your NGO, trust, or society. Complete legal support for non-profit organization.",
+            "canonical": "/services/ngo-registration"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "iso-certification",
+        "title": "ISO Certification",
+        "slug": "iso-certification",
+        "category": "Licenses & Registration",
+        "subCategory": "Quality Certification",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "ISO Certification Services - ISO 9001, 14001 | LegalNest",
+            "description": "Get ISO certification for your business. Quality management and environmental certification.",
+            "canonical": "/services/iso-certification"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "professional-tax-registration",
+        "title": "Professional Tax Registration",
+        "slug": "professional-tax-registration",
+        "category": "Tax & Compliance",
+        "subCategory": "Tax Registration",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Professional Tax Registration Online | LegalNest",
+            "description": "Register for professional tax and get PT certificate. State-wise professional tax registration.",
+            "canonical": "/services/professional-tax-registration"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "labour-license",
+        "title": "Labour License Registration",
+        "slug": "labour-license",
+        "category": "Licenses & Registration",
+        "subCategory": "Labour Compliance",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Labour License Registration - Contract Labour License | LegalNest",
+            "description": "Get labour license under Contract Labour Act. Expert support for labour compliance.",
+            "canonical": "/services/labour-license"
+        },
+        "contentBlocks": []
+    },
+    {
+        "id": "startup-india-registration",
+        "title": "Startup India Registration",
+        "slug": "startup-india-registration",
+        "category": "Business Registration",
+        "subCategory": "Startup Services",
+        "layoutVariant": "service-detail",
+        "seo": {
+            "title": "Startup India Registration - DPIIT Recognition | LegalNest",
+            "description": "Get Startup India recognition and avail government benefits. Tax exemption and funding support.",
+            "canonical": "/services/startup-india-registration"
+        },
+        "contentBlocks": []
     }
 ]

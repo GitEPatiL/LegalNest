@@ -1,42 +1,62 @@
 [
     {
-        "id": "mumbai",
-        "name": "Mumbai",
-        "state": "Maharashtra"
+        "cityName": "Mumbai",
+        "citySlug": "mumbai",
+        "state": "Maharashtra",
+        "seoModifier": "in Mumbai, Maharashtra"
     },
     {
-        "id": "delhi",
-        "name": "Delhi",
-        "state": "Delhi"
+        "cityName": "Delhi",
+        "citySlug": "delhi",
+        "state": "Delhi",
+        "seoModifier": "in Delhi NCR"
     },
     {
-        "id": "bangalore",
-        "name": "Bangalore",
-        "state": "Karnataka"
+        "cityName": "Bangalore",
+        "citySlug": "bangalore",
+        "state": "Karnataka",
+        "seoModifier": "in Bangalore, Karnataka"
     },
     {
-        "id": "hyderabad",
-        "name": "Hyderabad",
-        "state": "Telangana"
+        "cityName": "Hyderabad",
+        "citySlug": "hyderabad",
+        "state": "Telangana",
+        "seoModifier": "in Hyderabad, Telangana"
     },
     {
-        "id": "chennai",
-        "name": "Chennai",
-        "state": "Tamil Nadu"
+        "cityName": "Chennai",
+        "citySlug": "chennai",
+        "state": "Tamil Nadu",
+        "seoModifier": "in Chennai, Tamil Nadu"
     },
     {
-        "id": "kolkata",
-        "name": "Kolkata",
-        "state": "West Bengal"
+        "cityName": "Kolkata",
+        "citySlug": "kolkata",
+        "state": "West Bengal",
+        "seoModifier": "in Kolkata, West Bengal"
     },
     {
-        "id": "pune",
-        "name": "Pune",
-        "state": "Maharashtra"
+        "cityName": "Pune",
+        "citySlug": "pune",
+        "state": "Maharashtra",
+        "seoModifier": "in Pune, Maharashtra"
     },
     {
-        "id": "ahmedabad",
-        "name": "Ahmedabad",
-        "state": "Gujarat"
+        "cityName": "Ahmedabad",
+        "citySlug": "ahmedabad",
+        "state": "Gujarat",
+        "seoModifier": "in Ahmedabad, Gujarat"
+    },
+    {
+        "cityName": "Jaipur",
+        "citySlug": "jaipur",
+        "state": "Rajasthan",
+        "seoModifier": "in Jaipur, Rajasthan"
+    },
+    {
+        "cityName": "Lucknow",
+        "citySlug": "lucknow",
+        "state": "Uttar Pradesh",
+        "seoModifier": "in Lucknow, Uttar Pradesh"
     }
 ]
