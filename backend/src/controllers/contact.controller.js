@@ -1,45 +1,31 @@
-import Contact from '../models/Contact.js';
-import { getStorageMode, inMemoryStorage } from '../config/db.js';
+import jsonStorage from '../utils/jsonStorage.js';
 import emailService from '../services/email.service.js';
 import logger from '../utils/logger.js';
 
 export const createContact = async (req, res, next) => {
     try {
         const { name, email, phone, message } = req.body;
-        const { useInMemory } = getStorageMode();
 
-        let contact;
-        let contactId;
+        // Save to JSON
+        const newContact = await jsonStorage.add('contacts', {
+            name,
+            email,
+            phone,
+            message,
+            status: 'new'
+        });
+        logger.info(`💾 Contact saved to JSON: ${newContact._id}`);
 
-        if (useInMemory) {
-            // In-memory storage
-            contactId = Date.now().toString();
-            contact = {
-                _id: contactId,
-                name,
-                email,
-                phone,
-                message,
-                status: 'new',
-                createdAt: new Date(),
-            };
-            inMemoryStorage.contacts.push(contact);
-            logger.info(`💾 Contact saved to memory: ${contactId}`);
-        } else {
-            // MongoDB storage
-            contact = new Contact({ name, email, phone, message });
-            await contact.save();
-            contactId = contact._id.toString();
-            logger.info(`💾 Contact saved to DB: ${contactId}`);
-        }
-
-        // Send email notification
-        await emailService.sendContactNotification({ name, email, phone, message });
+        // Send Email Notification (Async - don't block response)
+        emailService.sendContactNotification(newContact).catch(err => {
+            logger.error(`Failed to send contact notification: ${err.message}`);
+        });
 
         res.status(201).json({
             success: true,
             message: 'Contact message received successfully',
-            id: contactId,
+            id: newContact._id,
+            data: newContact
         });
     } catch (error) {
         logger.error(`Contact creation error: ${error.message}`);
@@ -49,19 +35,12 @@ export const createContact = async (req, res, next) => {
 
 export const getAllContacts = async (req, res, next) => {
     try {
-        const { useInMemory } = getStorageMode();
-
-        let contacts;
-        if (useInMemory) {
-            contacts = inMemoryStorage.contacts;
-        } else {
-            contacts = await Contact.find().sort({ createdAt: -1 });
-        }
+        const contacts = await jsonStorage.readData('contacts');
 
         res.status(200).json({
             success: true,
             count: contacts.length,
-            data: contacts,
+            data: contacts.reverse(), // Newest first
         });
     } catch (error) {
         logger.error(`Fetch contacts error: ${error.message}`);

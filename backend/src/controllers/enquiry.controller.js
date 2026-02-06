@@ -1,46 +1,32 @@
-import Enquiry from '../models/Enquiry.js';
-import { getStorageMode, inMemoryStorage } from '../config/db.js';
+import jsonStorage from '../utils/jsonStorage.js';
 import emailService from '../services/email.service.js';
 import logger from '../utils/logger.js';
 
 export const createEnquiry = async (req, res, next) => {
     try {
         const { name, email, phone, service, details } = req.body;
-        const { useInMemory } = getStorageMode();
 
-        let enquiry;
-        let enquiryId;
+        // Save to JSON
+        const newEnquiry = await jsonStorage.add('enquiries', {
+            name,
+            email,
+            phone,
+            service,
+            details,
+            status: 'pending'
+        });
+        logger.info(`💾 Enquiry saved to JSON: ${newEnquiry._id}`);
 
-        if (useInMemory) {
-            // In-memory storage
-            enquiryId = Date.now().toString();
-            enquiry = {
-                _id: enquiryId,
-                name,
-                email,
-                phone,
-                service,
-                details,
-                status: 'pending',
-                createdAt: new Date(),
-            };
-            inMemoryStorage.enquiries.push(enquiry);
-            logger.info(`💾 Enquiry saved to memory: ${enquiryId}`);
-        } else {
-            // MongoDB storage
-            enquiry = new Enquiry({ name, email, phone, service, details });
-            await enquiry.save();
-            enquiryId = enquiry._id.toString();
-            logger.info(`💾 Enquiry saved to DB: ${enquiryId}`);
-        }
-
-        // Send email notification
-        await emailService.sendEnquiryNotification({ name, email, phone, service, details });
+        // Send Email Notification
+        emailService.sendEnquiryNotification(newEnquiry).catch(err => {
+            logger.error(`Failed to send enquiry notification: ${err.message}`);
+        });
 
         res.status(201).json({
             success: true,
             message: 'Enquiry received successfully',
-            id: enquiryId,
+            id: newEnquiry._id,
+            data: newEnquiry
         });
     } catch (error) {
         logger.error(`Enquiry creation error: ${error.message}`);
@@ -50,19 +36,12 @@ export const createEnquiry = async (req, res, next) => {
 
 export const getAllEnquiries = async (req, res, next) => {
     try {
-        const { useInMemory } = getStorageMode();
-
-        let enquiries;
-        if (useInMemory) {
-            enquiries = inMemoryStorage.enquiries;
-        } else {
-            enquiries = await Enquiry.find().sort({ createdAt: -1 });
-        }
+        const enquiries = await jsonStorage.readData('enquiries');
 
         res.status(200).json({
             success: true,
             count: enquiries.length,
-            data: enquiries,
+            data: enquiries.reverse(),
         });
     } catch (error) {
         logger.error(`Fetch enquiries error: ${error.message}`);
