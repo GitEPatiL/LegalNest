@@ -3,14 +3,94 @@
 @tailwind utilities;
 
 :root {
+  /* Base Colors */
   --foreground: #0a0a0a;
   --background: #ffffff;
+
+  /* Primary Yellow Shades - from siteConfig.themeColors.primary */
+  --color-primary-50: #fffbeb;
+  --color-primary-100: #fef3c7;
+  --color-primary-200: #fde68a;
+  --color-primary-300: #fcd34d;
+  --color-primary-400: #fbbf24;
+  --color-primary-500: #f59e0b;
+  --color-primary-600: #d97706;
+  --color-primary-700: #b45309;
+  --color-primary-800: #92400e;
+  --color-primary-900: #78350f;
+  --color-primary-950: #451a03;
+
+  /* Dark/Black Shades - from siteConfig.themeColors.dark */
+  --color-dark-50: #f7f7f7;
+  --color-dark-100: #e3e3e3;
+  --color-dark-200: #c8c8c8;
+  --color-dark-300: #a4a4a4;
+  --color-dark-400: #818181;
+  --color-dark-500: #666666;
+  --color-dark-600: #515151;
+  --color-dark-700: #434343;
+  --color-dark-800: #383838;
+  --color-dark-900: #1a1a1a;
+  --color-dark-950: #0a0a0a;
+
+  /* Accent Colors - from siteConfig.themeColors.accent */
+  --color-accent-yellow: #fbbf24;
+  --color-accent-gold: #f59e0b;
+  --color-accent-light-yellow: #fde68a;
+  --color-accent-dark-gray: #383838;
+
+  /* Semantic Colors - from siteConfig.themeColors.semantic */
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+
+  /* Brand Colors - Main theme */
+  --brand-primary: var(--color-primary-500);
+  --brand-dark: var(--color-dark-900);
+  --brand-black: var(--color-dark-950);
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --shadow-yellow: 0 10px 30px rgba(245, 158, 11, 0.3);
+
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
+
+  /* Z-Index Layers */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground: #ffffff;
-    --background: #0a0a0a;
+    --background: var(--color-dark-950);
   }
 }
 
@@ -20,10 +100,59 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Utility Classes */
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  /* Gradient Utilities */
+  .gradient-yellow {
+    background: linear-gradient(135deg, var(--color-primary-400), var(--color-primary-600));
+  }
+
+  .gradient-dark {
+    background: linear-gradient(135deg, var(--color-dark-800), var(--color-dark-950));
+  }
+
+  .gradient-yellow-dark {
+    background: linear-gradient(135deg, var(--color-primary-500), var(--color-dark-900));
+  }
+
+  /* Glass Effect */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .glass-dark {
+    background: rgba(26, 26, 26, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Shadow Utilities */
+  .shadow-yellow {
+    box-shadow: var(--shadow-yellow);
+  }
+
+  /* Animation Utilities */
+  .transition-fast {
+    transition: all var(--transition-fast);
+  }
+
+  .transition-normal {
+    transition: all var(--transition-normal);
+  }
+
+  .transition-slow {
+    transition: all var(--transition-slow);
   }
 }
