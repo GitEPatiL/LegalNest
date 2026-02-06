@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "title": "5 Essential Steps to Register a Private Limited Company",
+        "slug": "register-private-limited-company-steps",
+        "excerpt": "A complete guide on how to register your startup as a Private Limited Company in India.",
+        "category": "Startup",
+        "date": "Oct 15, 2025",
+        "image": null
+    },
+    {
+        "id": 2,
+        "title": "Understanding GST: A Guide for Small Business Owners",
+        "slug": "gst-guide-small-business",
+        "excerpt": "Everything you need to know about GST registration, filing, and compliance.",
+        "category": "Taxation",
+        "date": "Nov 2, 2025",
+        "image": null
+    },
+    {
+        "id": 3,
+        "title": "Why Trademark Registration is Crucial for Your Brand",
+        "slug": "trademark-registration-importance",
+        "excerpt": "Protect your brand identity and avoid legal disputes with timely trademark registration.",
+        "category": "Intellectual Property",
+        "date": "Dec 10, 2025",
+        "image": null
+    }
+]

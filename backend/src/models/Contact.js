@@ -1,17 +1,16 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const contactSchema = new mongoose.Schema({
+const ContactSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Name is required'],
+        required: true,
         trim: true,
     },
     email: {
         type: String,
-        required: [true, 'Email is required'],
-        trim: true,
+        required: true,
         lowercase: true,
-        match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email'],
+        trim: true,
     },
     phone: {
         type: String,
@@ -19,7 +18,7 @@ const contactSchema = new mongoose.Schema({
     },
     message: {
         type: String,
-        required: [true, 'Message is required'],
+        required: true,
     },
     status: {
         type: String,
@@ -32,4 +31,6 @@ const contactSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('Contact', contactSchema);
+const Contact = mongoose.model('Contact', ContactSchema);
+
+export default Contact;

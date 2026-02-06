@@ -1,15 +1,15 @@
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const morgan = require('morgan');
-const { ALLOWED_ORIGINS } = require('./config/env');
-const errorHandler = require('./middleware/errorHandler');
-const logger = require('./utils/logger');
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import config from './config/env.js';
+import errorHandler from './middleware/errorHandler.js';
+import logger from './utils/logger.js';
 
 // Import Routes
-const contactRoutes = require('./routes/contact.routes');
-const enquiryRoutes = require('./routes/enquiry.routes');
-const serviceRoutes = require('./routes/service.routes');
+import contactRoutes from './routes/contact.routes.js';
+import enquiryRoutes from './routes/enquiry.routes.js';
+import serviceRoutes from './routes/service.routes.js';
 
 const app = express();
 
@@ -18,12 +18,15 @@ app.use(helmet());
 
 // CORS Configuration
 app.use(cors({
-    origin: ALLOWED_ORIGINS.split(',').map(origin => origin.trim()),
+    origin: config.cors.allowedOrigins,
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
 }));
 
 // Request Logging
-app.use(morgan('combined', { stream: { write: message => logger.info(message.trim()) } }));
+app.use(morgan('combined', {
+    stream: { write: message => logger.info(message.trim()) }
+}));
 
 // Body Parsers
 app.use(express.json());
@@ -54,4 +57,4 @@ app.use((req, res) => {
 // Error Handler (must be last)
 app.use(errorHandler);
 
-module.exports = app;
+export default app;

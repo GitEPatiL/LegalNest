@@ -1,84 +1,66 @@
-/**
- * API Client for LegalNest Frontend
- * Handles all HTTP requests to the backend API
- */
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
-export const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-
-/**
- * Generic API request handler
- */
-async function apiRequest(endpoint, options = {}) {
-    const url = `${API_BASE}${endpoint}`;
-
-    const config = {
-        method: options.method || 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            ...options.headers,
-        },
-        ...options,
-    };
-
-    if (options.body) {
-        config.body = JSON.stringify(options.body);
+class ApiClient {
+    constructor(baseURL) {
+        this.baseURL = baseURL;
     }
 
-    try {
-        const response = await fetch(url, config);
-        const data = await response.json();
+    async request(endpoint, options = {}) {
+        const url = `${this.baseURL}${endpoint}`;
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers,
+            },
+            ...options,
+        };
 
-        if (!response.ok) {
-            throw new Error(data.message || 'API request failed');
+        try {
+            const response = await fetch(url, config);
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'API request failed');
+            }
+
+            return data;
+        } catch (error) {
+            console.error('API Error:', error);
+            throw error;
         }
+    }
 
-        return data;
-    } catch (error) {
-        console.error('API Error:', error);
-        throw error;
+    // Contact form submission
+    async postContact(data) {
+        return this.request('/api/contact', {
+            method: 'POST',
+            body: JSON.stringify(data),
+        });
+    }
+
+    // Enquiry form submission
+    async postEnquiry(data) {
+        return this.request('/api/enquiry', {
+            method: 'POST',
+            body: JSON.stringify(data),
+        });
+    }
+
+    // Get all services
+    async getServices() {
+        return this.request('/api/services', {
+            method: 'GET',
+        });
+    }
+
+    // Get service by slug
+    async getServiceBySlug(slug) {
+        return this.request(`/api/services/${slug}`, {
+            method: 'GET',
+        });
     }
 }
 
-/**
- * Submit contact form
- * @param {Object} payload - Contact form data
- */
-export async function postContact(payload) {
-    return apiRequest('/api/contact', {
-        method: 'POST',
-        body: payload,
-    });
-}
+const apiClient = new ApiClient(API_BASE_URL);
 
-/**
- * Submit enquiry form
- * @param {Object} payload - Enquiry form data
- */
-export async function postEnquiry(payload) {
-    return apiRequest('/api/enquiry', {
-        method: 'POST',
-        body: payload,
-    });
-}
-
-/**
- * Get all services
- */
-export async function getServices() {
-    return apiRequest('/api/services');
-}
-
-/**
- * Get service by ID
- * @param {string} id - Service ID
- */
-export async function getServiceById(id) {
-    return apiRequest(`/api/services/${id}`);
-}
-
-/**
- * Health check
- */
-export async function checkHealth() {
-    return apiRequest('/health');
-}
+export default apiClient;

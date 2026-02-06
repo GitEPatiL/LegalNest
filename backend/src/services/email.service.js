@@ -1,94 +1,96 @@
-const nodemailer = require('nodemailer');
-const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = require('../config/env');
-const logger = require('../utils/logger');
+import nodemailer from 'nodemailer';
+import config from '../config/env.js';
+import logger from '../utils/logger.js';
 
-/**
- * Create email transporter
- */
-const createTransporter = () => {
-    if (!SMTP_USER || !SMTP_PASS) {
-        logger.warn('⚠️  SMTP credentials not configured. Email sending disabled.');
-        return null;
+class EmailService {
+    constructor() {
+        this.transporter = null;
+        this.initialize();
     }
 
-    return nodemailer.createTransport({
-        host: SMTP_HOST,
-        port: SMTP_PORT,
-        secure: SMTP_PORT === 465,
-        auth: {
-            user: SMTP_USER,
-            pass: SMTP_PASS,
-        },
-    });
-};
+    initialize() {
+        if (!config.smtp.user || !config.smtp.pass) {
+            logger.warn('⚠️  SMTP credentials not configured. Email service disabled.');
+            return;
+        }
 
-/**
- * Send contact form notification email
- */
-async function sendContactNotification(contact) {
-    const transporter = createTransporter();
-    if (!transporter) return;
+        this.transporter = nodemailer.createTransporter({
+            host: config.smtp.host,
+            port: config.smtp.port,
+            secure: false, // Use TLS
+            auth: {
+                user: config.smtp.user,
+                pass: config.smtp.pass,
+            },
+        });
 
-    const mailOptions = {
-        from: `"LegalNest" <${SMTP_USER}>`,
-        to: SMTP_USER, // Send to admin
-        subject: `New Contact Form Submission - ${contact.name}`,
-        html: `
-      <h2>New Contact Form Submission</h2>
-      <p><strong>Name:</strong> ${contact.name}</p>
-      <p><strong>Email:</strong> ${contact.email}</p>
-      <p><strong>Phone:</strong> ${contact.phone || 'N/A'}</p>
-      <p><strong>Message:</strong></p>
-      <p>${contact.message}</p>
-      <hr>
-      <p><small>Submitted on: ${new Date().toLocaleString()}</small></p>
-    `,
-    };
+        logger.info('✅ Email service initialized');
+    }
 
-    try {
-        await transporter.sendMail(mailOptions);
-        logger.info(`Contact notification sent for: ${contact.email}`);
-    } catch (error) {
-        logger.error('Failed to send contact notification:', error);
-        throw error;
+    async sendContactNotification(contactData) {
+        if (!this.transporter) {
+            logger.warn('📧 Email service not available. Skipping notification.');
+            return { success: false, message: 'Email service not configured' };
+        }
+
+        try {
+            const mailOptions = {
+                from: config.smtp.user,
+                to: config.smtp.user, // Send to self
+                subject: `New Contact Form Submission from ${contactData.name}`,
+                html: `
+          <h2>New Contact Message</h2>
+          <p><strong>Name:</strong> ${contactData.name}</p>
+          <p><strong>Email:</strong> ${contactData.email}</p>
+          <p><strong>Phone:</strong> ${contactData.phone || 'Not provided'}</p>
+          <p><strong>Message:</strong></p>
+          <p>${contactData.message}</p>
+          <hr>
+          <p style="color: gray; font-size: 12px;">Received at: ${new Date().toLocaleString()}</p>
+        `,
+            };
+
+            const info = await this.transporter.sendMail(mailOptions);
+            logger.info(`📧 Email sent: ${info.messageId}`);
+            return { success: true, messageId: info.messageId };
+        } catch (error) {
+            logger.error(`📧 Email send failed: ${error.message}`);
+            return { success: false, error: error.message };
+        }
+    }
+
+    async sendEnquiryNotification(enquiryData) {
+        if (!this.transporter) {
+            logger.warn('📧 Email service not available. Skipping notification.');
+            return { success: false, message: 'Email service not configured' };
+        }
+
+        try {
+            const mailOptions = {
+                from: config.smtp.user,
+                to: config.smtp.user,
+                subject: `New Enquiry for ${enquiryData.service || 'General Service'}`,
+                html: `
+          <h2>New Enquiry Received</h2>
+          <p><strong>Name:</strong> ${enquiryData.name}</p>
+          <p><strong>Email:</strong> ${enquiryData.email}</p>
+          <p><strong>Phone:</strong> ${enquiryData.phone}</p>
+          <p><strong>Service:</strong> ${enquiryData.service || 'Not specified'}</p>
+          <p><strong>Details:</strong></p>
+          <p>${enquiryData.details || 'No additional details provided'}</p>
+          <hr>
+          <p style="color: gray; font-size: 12px;">Received at: ${new Date().toLocaleString()}</p>
+        `,
+            };
+
+            const info = await this.transporter.sendMail(mailOptions);
+            logger.info(`📧 Email sent: ${info.messageId}`);
+            return { success: true, messageId: info.messageId };
+        } catch (error) {
+            logger.error(`📧 Email send failed: ${error.message}`);
+            return { success: false, error: error.message };
+        }
     }
 }
 
-/**
- * Send enquiry notification email
- */
-async function sendEnquiryNotification(enquiry) {
-    const transporter = createTransporter();
-    if (!transporter) return;
-
-    const mailOptions = {
-        from: `"LegalNest" <${SMTP_USER}>`,
-        to: SMTP_USER, // Send to admin
-        subject: `New Service Enquiry - ${enquiry.service}`,
-        html: `
-      <h2>New Service Enquiry</h2>
-      <p><strong>Name:</strong> ${enquiry.name}</p>
-      <p><strong>Email:</strong> ${enquiry.email}</p>
-      <p><strong>Phone:</strong> ${enquiry.phone}</p>
-      <p><strong>Service:</strong> ${enquiry.service}</p>
-      <p><strong>City:</strong> ${enquiry.city || 'N/A'}</p>
-      <p><strong>Message:</strong></p>
-      <p>${enquiry.message || 'N/A'}</p>
-      <hr>
-      <p><small>Submitted on: ${new Date().toLocaleString()}</small></p>
-    `,
-    };
-
-    try {
-        await transporter.sendMail(mailOptions);
-        logger.info(`Enquiry notification sent for: ${enquiry.email}`);
-    } catch (error) {
-        logger.error('Failed to send enquiry notification:', error);
-        throw error;
-    }
-}
-
-module.exports = {
-    sendContactNotification,
-    sendEnquiryNotification,
-};
+export default new EmailService();

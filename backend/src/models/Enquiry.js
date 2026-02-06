@@ -1,38 +1,34 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const enquirySchema = new mongoose.Schema({
+const EnquirySchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, 'Name is required'],
+        required: true,
         trim: true,
     },
     email: {
         type: String,
-        required: [true, 'Email is required'],
-        trim: true,
+        required: true,
         lowercase: true,
-        match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email'],
+        trim: true,
     },
     phone: {
         type: String,
-        required: [true, 'Phone number is required'],
+        required: true,
         trim: true,
     },
     service: {
         type: String,
-        required: [true, 'Service type is required'],
+        trim: true,
     },
-    city: {
+    details: {
         type: String,
         trim: true,
     },
-    message: {
-        type: String,
-    },
     status: {
         type: String,
-        enum: ['new', 'contacted', 'in-progress', 'completed'],
-        default: 'new',
+        enum: ['pending', 'contacted', 'converted', 'closed'],
+        default: 'pending',
     },
     createdAt: {
         type: Date,
@@ -40,4 +36,6 @@ const enquirySchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('Enquiry', enquirySchema);
+const Enquiry = mongoose.model('Enquiry', EnquirySchema);
+
+export default Enquiry;

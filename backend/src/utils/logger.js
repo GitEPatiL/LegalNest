@@ -1,30 +1,35 @@
-/**
- * Simple logger utility
- */
+const colors = {
+    reset: '\x1b[0m',
+    red: '\x1b[31m',
+    green: '\x1b[32m',
+    yellow: '\x1b[33m',
+    blue: '\x1b[34m',
+    magenta: '\x1b[35m',
+    cyan: '\x1b[36m',
+};
+
 class Logger {
-    log(level, message, data = {}) {
-        const timestamp = new Date().toISOString();
-        const logData = typeof data === 'object' ? JSON.stringify(data) : data;
-        console.log(`[${timestamp}] [${level.toUpperCase()}] ${message}`, logData !== '{}' ? logData : '');
+    info(message) {
+        console.log(`${colors.cyan}[INFO]${colors.reset} ${message}`);
     }
 
-    info(message, data) {
-        this.log('info', message, data);
+    warn(message) {
+        console.log(`${colors.yellow}[WARN]${colors.reset} ${message}`);
     }
 
-    warn(message, data) {
-        this.log('warn', message, data);
+    error(message) {
+        console.log(`${colors.red}[ERROR]${colors.reset} ${message}`);
     }
 
-    error(message, data) {
-        this.log('error', message, data);
+    success(message) {
+        console.log(`${colors.green}[SUCCESS]${colors.reset} ${message}`);
     }
 
-    debug(message, data) {
+    debug(message) {
         if (process.env.NODE_ENV === 'development') {
-            this.log('debug', message, data);
+            console.log(`${colors.magenta}[DEBUG]${colors.reset} ${message}`);
         }
     }
 }
 
-module.exports = new Logger();
+export default new Logger();

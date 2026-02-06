@@ -1,16 +1,18 @@
-require('dotenv').config();
-const app = require('./app');
-const { PORT } = require('./config/env');
-const { connectDB } = require('./config/db');
-const logger = require('./utils/logger');
+import dotenv from 'dotenv';
+dotenv.config();
+
+import app from './app.js';
+import config from './config/env.js';
+import connectDB from './config/db.js';
+import logger from './utils/logger.js';
 
 // Connect to Database
 connectDB();
 
 // Start Server
-const server = app.listen(PORT, () => {
-    logger.info(`🚀 Server running on port ${PORT} in ${process.env.NODE_ENV} mode`);
-    logger.info(`📡 API available at http://localhost:${PORT}/api`);
+const server = app.listen(config.port, () => {
+    logger.info(`🚀 Server running on port ${config.port} in ${config.nodeEnv} mode`);
+    logger.info(`📡 API available at http://localhost:${config.port}/api`);
 });
 
 // Graceful Shutdown
@@ -23,6 +25,6 @@ process.on('SIGTERM', () => {
 });
 
 process.on('unhandledRejection', (err) => {
-    logger.error('Unhandled Rejection:', err);
+    logger.error(`Unhandled Rejection: ${err.message}`);
     server.close(() => process.exit(1));
 });

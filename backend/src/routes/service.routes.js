@@ -1,11 +1,12 @@
-const express = require('express');
+import express from 'express';
+import { getServices, getServiceBySlug } from '../controllers/service.controller.js';
+
 const router = express.Router();
-const serviceController = require('../controllers/service.controller');
 
 // GET /api/services - Get all services
-router.get('/', serviceController.getAllServices);
+router.get('/', getServices);
 
-// GET /api/services/:id - Get service by ID
-router.get('/:id', serviceController.getServiceById);
+// GET /api/services/:slug - Get service by slug
+router.get('/:slug', getServiceBySlug);
 
-module.exports = router;
+export default router;

@@ -1,48 +1,46 @@
-const mongoose = require('mongoose');
-const { DB_URI } = require('./env');
-const logger = require('../utils/logger');
+import mongoose from 'mongoose';
+import logger from '../utils/logger.js';
 
-/**
- * Connect to MongoDB Database
- */
-async function connectDB() {
+// In-memory fallback storage
+let inMemoryStorage = {
+    contacts: [],
+    enquiries: [],
+};
+
+let isConnected = false;
+let useInMemory = false;
+
+const connectDB = async () => {
+    const dbUri = process.env.DB_URI;
+
+    if (!dbUri || dbUri === 'mongodb://localhost:27017/legalnest') {
+        logger.warn('⚠️  No valid DB_URI provided. Using in-memory storage.');
+        useInMemory = true;
+        isConnected = true;
+        return;
+    }
+
     try {
-        if (!DB_URI) {
-            logger.warn('⚠️  DB_URI not configured. Skipping database connection.');
-            return;
-        }
-
-        await mongoose.connect(DB_URI, {
+        await mongoose.connect(dbUri, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
-
-        logger.info('✅ MongoDB connected successfully');
-
-        mongoose.connection.on('error', (err) => {
-            logger.error('MongoDB connection error:', err);
-        });
-
-        mongoose.connection.on('disconnected', () => {
-            logger.warn('MongoDB disconnected');
-        });
-
+        isConnected = true;
+        useInMemory = false;
+        logger.info(`✅ MongoDB connected successfully`);
     } catch (error) {
-        logger.error('❌ MongoDB connection failed:', error.message);
-        // Don't exit process, allow server to run without DB for development
+        logger.error(`❌ MongoDB connection failed: ${error.message}`);
+        logger.warn('⚠️  Falling back to in-memory storage');
+        useInMemory = true;
+        isConnected = true;
     }
-}
+};
 
-/**
- * Disconnect from MongoDB
- */
-async function disconnectDB() {
-    try {
-        await mongoose.connection.close();
-        logger.info('MongoDB disconnected');
-    } catch (error) {
-        logger.error('Error disconnecting from MongoDB:', error);
-    }
-}
+const getStorageMode = () => ({
+    isConnected,
+    useInMemory,
+    storage: useInMemory ? inMemoryStorage : null,
+});
 
-module.exports = { connectDB, disconnectDB };
+export { connectDB, getStorageMode, inMemoryStorage };
+export default connectDB;

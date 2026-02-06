@@ -1,54 +1,47 @@
-const fs = require('fs');
-const path = require('path');
-const logger = require('../utils/logger');
+import fs from 'fs/promises';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import logger from '../utils/logger.js';
 
-// Load services from JSON file (placeholder)
-const servicesData = [
-    {
-        id: 'gst-registration',
-        title: 'GST Registration',
-        description: 'Complete GST registration and compliance services',
-        category: 'tax',
-    },
-    {
-        id: 'company-incorporation',
-        title: 'Company Incorporation',
-        description: 'Business registration and incorporation services',
-        category: 'business',
-    },
-    {
-        id: 'trademark-registration',
-        title: 'Trademark Registration',
-        description: 'Protect your brand with trademark registration',
-        category: 'intellectual-property',
-    },
-];
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-/**
- * Get all services
- * @route GET /api/services
- */
-exports.getAllServices = async (req, res, next) => {
+export const getServices = async (req, res, next) => {
     try {
+        // Path to frontend services.json
+        const servicesPath = path.resolve(__dirname, '../../../frontend/src/data/services.json');
+
+        const data = await fs.readFile(servicesPath, 'utf-8');
+        const services = JSON.parse(data);
+
         res.status(200).json({
             success: true,
-            count: servicesData.length,
-            data: servicesData,
+            count: services.length,
+            data: services,
         });
     } catch (error) {
-        logger.error('Get services error:', error);
+        logger.error(`Get services error: ${error.message}`);
+
+        if (error.code === 'ENOENT') {
+            return res.status(404).json({
+                success: false,
+                message: 'Services data file not found',
+            });
+        }
+
         next(error);
     }
 };
 
-/**
- * Get service by ID
- * @route GET /api/services/:id
- */
-exports.getServiceById = async (req, res, next) => {
+export const getServiceBySlug = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const service = servicesData.find(s => s.id === id);
+        const { slug } = req.params;
+        const servicesPath = path.resolve(__dirname, '../../../frontend/src/data/services.json');
+
+        const data = await fs.readFile(servicesPath, 'utf-8');
+        const services = JSON.parse(data);
+
+        const service = services.find(s => s.slug === slug);
 
         if (!service) {
             return res.status(404).json({
@@ -62,7 +55,7 @@ exports.getServiceById = async (req, res, next) => {
             data: service,
         });
     } catch (error) {
-        logger.error('Get service error:', error);
+        logger.error(`Get service error: ${error.message}`);
         next(error);
     }
 };

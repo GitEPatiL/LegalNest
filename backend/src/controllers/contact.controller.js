@@ -1,42 +1,70 @@
-const Contact = require('../models/Contact');
-const emailService = require('../services/email.service');
-const logger = require('../utils/logger');
+import Contact from '../models/Contact.js';
+import { getStorageMode, inMemoryStorage } from '../config/db.js';
+import emailService from '../services/email.service.js';
+import logger from '../utils/logger.js';
 
-/**
- * Submit contact form
- * @route POST /api/contact
- */
-exports.submitContact = async (req, res, next) => {
+export const createContact = async (req, res, next) => {
     try {
         const { name, email, phone, message } = req.body;
+        const { useInMemory } = getStorageMode();
 
-        // Create contact record
-        const contact = await Contact.create({
-            name,
-            email,
-            phone,
-            message,
-        });
+        let contact;
+        let contactId;
+
+        if (useInMemory) {
+            // In-memory storage
+            contactId = Date.now().toString();
+            contact = {
+                _id: contactId,
+                name,
+                email,
+                phone,
+                message,
+                status: 'new',
+                createdAt: new Date(),
+            };
+            inMemoryStorage.contacts.push(contact);
+            logger.info(`💾 Contact saved to memory: ${contactId}`);
+        } else {
+            // MongoDB storage
+            contact = new Contact({ name, email, phone, message });
+            await contact.save();
+            contactId = contact._id.toString();
+            logger.info(`💾 Contact saved to DB: ${contactId}`);
+        }
 
         // Send email notification
-        try {
-            await emailService.sendContactNotification(contact);
-        } catch (emailError) {
-            logger.error('Email sending failed:', emailError);
-            // Continue even if email fails
-        }
+        await emailService.sendContactNotification({ name, email, phone, message });
 
         res.status(201).json({
             success: true,
-            message: 'Thank you for contacting us. We will get back to you soon.',
-            data: {
-                id: contact._id,
-                name: contact.name,
-                email: contact.email,
-            },
+            message: 'Contact message received successfully',
+            id: contactId,
         });
     } catch (error) {
-        logger.error('Contact submission error:', error);
+        logger.error(`Contact creation error: ${error.message}`);
+        next(error);
+    }
+};
+
+export const getAllContacts = async (req, res, next) => {
+    try {
+        const { useInMemory } = getStorageMode();
+
+        let contacts;
+        if (useInMemory) {
+            contacts = inMemoryStorage.contacts;
+        } else {
+            contacts = await Contact.find().sort({ createdAt: -1 });
+        }
+
+        res.status(200).json({
+            success: true,
+            count: contacts.length,
+            data: contacts,
+        });
+    } catch (error) {
+        logger.error(`Fetch contacts error: ${error.message}`);
         next(error);
     }
 };
